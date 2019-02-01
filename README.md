@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/zevada/stateful.svg?branch=master)](https://travis-ci.org/zevada/stateful)
-
 # Introduction
 
 Conditionalstateful is a modification of the simple and lightweight event driven state machine library [stateful](https://travis-ci.org/zevada/stateful). With 
