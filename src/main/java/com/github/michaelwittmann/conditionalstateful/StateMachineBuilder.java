@@ -1,17 +1,18 @@
-package com.github.zevada.stateful;
+package com.github.michaelwittmann.conditionalstateful;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * A builder for simple event based state machines
  *
  * @param <State> The state of the entity
- * @param <EventType> The event type to be handled
+
  */
-final public class StateMachineBuilder<State extends Enum<State>, EventType extends Enum<EventType>> {
-  private final Map<State, Node<State, EventType>> nodes;
-  private final Node<State, EventType> root;
+final public class StateMachineBuilder<State extends Enum<State>> {
+  private final Map<State, Node<State>> nodes;
+  private final Node<State> root;
 
   /**
    * @param initialState the initial state of the state machine
@@ -29,7 +30,7 @@ final public class StateMachineBuilder<State extends Enum<State>, EventType exte
    *
    * @return the final state machine
    */
-  public StateMachine<State, EventType> build() {
+  public StateMachine<State> build() {
     return new StateMachine<>(root);
   }
 
@@ -38,25 +39,24 @@ final public class StateMachineBuilder<State extends Enum<State>, EventType exte
    * to "endState" in response to events of type "eventType"
    *
    * @param startState the starting state of the transition
-   * @param eventType the event type that triggered the transition
+   * @param condition the transition condition expression
    * @param endState the end state of the transition
    */
-  public StateMachineBuilder<State, EventType> addTransition(State startState, EventType eventType, State endState) {
-    Node<State, EventType> startNode = nodes.get(startState);
+  public StateMachineBuilder<State> addTransition(State startState, Callable<Boolean> condition, State endState) {
+    Node<State> startNode = nodes.get(startState);
 
     if (startNode == null) {
       startNode = new Node<>(startState);
       nodes.put(startState, startNode);
     }
 
-    Node<State, EventType> endNode = nodes.get(endState);
+    Node<State> endNode = nodes.get(endState);
 
     if (endNode == null) {
       endNode = new Node<>(endState);
       nodes.put(endState, endNode);
     }
-
-    startNode.addNeighbor(eventType, endNode);
+    startNode.addTransition(new Transition<>(startNode, condition, endNode));
 
     return this;
   }
@@ -68,8 +68,8 @@ final public class StateMachineBuilder<State extends Enum<State>, EventType exte
    * @param state The state for which we are listening to onEnter events
    * @param onEnter The runnable to call when the state is entered
    */
-  public StateMachineBuilder<State, EventType> onEnter(State state, Runnable onEnter) {
-    Node<State, EventType> node = nodes.get(state);
+  public StateMachineBuilder<State> onEnter(State state, Runnable onEnter) {
+    Node<State> node = nodes.get(state);
 
     if (node == null) {
       node = new Node<>(state);
@@ -88,8 +88,8 @@ final public class StateMachineBuilder<State extends Enum<State>, EventType exte
    * @param state The state for which we are listening to onExit events
    * @param onExit The runnable to call when the state is exited
    */
-  public StateMachineBuilder<State, EventType> onExit(State state, Runnable onExit) {
-    Node<State, EventType> node = nodes.get(state);
+  public StateMachineBuilder<State> onExit(State state, Runnable onExit) {
+    Node<State> node = nodes.get(state);
 
     if (node == null) {
       node = new Node<>(state);

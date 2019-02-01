@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.zevada</groupId>
-  <artifactId>stateful</artifactId>
-  <version>1.0.0</version>
+  <groupId>com.github.michaelwittmann</groupId>
+  <artifactId>conditionalstateful</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A simple and lightweight event driven state machine library</description>
-  <url>https://github.com/zevada/stateful</url>
+  <url>https://github.com/michaelwittmann/conditionalstateful</url>
 
   <licenses>
     <license>
@@ -23,24 +23,17 @@
     <developer>
       <name>Sevada Abraamyan</name>
     </developer>
+    <developer>
+      <name>Michael Wittmann</name>
+    </developer>
   </developers>
 
-  <scm>
-    <connection>scm:git:git@github.com:zevada/stateful.git</connection>
-    <developerConnection>scm:git:git@github.com:zevada/stateful.git</developerConnection>
-    <url>git@github.com:zevada/stateful.git</url>
-  </scm>
+  <!--<scm>-->
+    <!--<connection>scm:git:git@github.com:zevada/stateful.git</connection>-->
+    <!--<developerConnection>scm:git:git@github.com:zevada/stateful.git</developerConnection>-->
+    <!--<url>git@github.com:zevada/stateful.git</url>-->
+  <!--</scm>-->
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
 
   <dependencies>
     <dependency>
