@@ -28,11 +28,11 @@ StateMachine<State> stateMachine =
     .build();
 
 stateMachine.getState(); // State.INIT
-a.setValue(10)
-stateMachine.evaluate()
+a.setValue(10);
+stateMachine.evaluate();
 stateMachine.getState(); // State.RUNNING
-b.setValue(true)
-stateMachine.evaluate()
+b.setValue(true);
+stateMachine.evaluate();
 stateMachine.getState(); // State.COMPLETED
 ```
 
@@ -45,6 +45,6 @@ StateMachine<State, > stateMachine =
     .onExit(State.INIT, () -> System.out.println("Exiting Init!"))
     .onEnter(State.RUNNING, () -> System.out.println("Entering Running!"))
     .build();
-a.setValue(10)
-stateMachine.evaluate()
+a.setValue(10);
+stateMachine.evaluate();
 ```
