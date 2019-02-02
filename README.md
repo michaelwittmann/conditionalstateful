@@ -39,7 +39,7 @@ stateMachine.getState(); // State.COMPLETED
 ### On State Enter/Exit Listeners
 
 ```java
-StateMachine<State, > stateMachine =
+StateMachine<State> stateMachine =
   new StateMachineBuilder<State>(State.INIT)
     .addTransition(State.INIT, () -> a.getValue() >=10 , State.RUNNING)
     .onExit(State.INIT, () -> System.out.println("Exiting Init!"))
